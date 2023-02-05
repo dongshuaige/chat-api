@@ -1,5 +1,6 @@
 package cn.bugstack.chatbot.api.test;
 
+import cn.bugstack.chatbot.api.domain.ai.IOpenAI;
 import cn.bugstack.chatbot.api.domain.zsxq.IZsxqApi;
 import cn.bugstack.chatbot.api.domain.zsxq.model.aggregates.UnAnsweredQuestionsAggregates;
 import cn.bugstack.chatbot.api.domain.zsxq.model.vo.Topics;
@@ -32,6 +33,8 @@ public class SpringBootRunTest {
     private String groupId;
     @Value("${chatbot-api.cookie}")
     private String cookie;
+    @Resource
+    private IOpenAI openAI;
 
     @Test
     public void test_zsxqApi() throws IOException {
@@ -47,6 +50,12 @@ public class SpringBootRunTest {
             // 回答问题
             zsxqApi.answer(groupId, cookie, topicId, text, false);
         }
+    }
+
+    @Test
+    public void test_openAI() throws IOException {
+        String answer = openAI.doChatGPT("使用java实现建造模式");
+        logger.info("回答结果:{}", answer);
     }
 
 }

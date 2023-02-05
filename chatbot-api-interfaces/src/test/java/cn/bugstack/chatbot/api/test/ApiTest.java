@@ -60,4 +60,24 @@ public class ApiTest {
         }
     }
 
+    @Test
+    public void test_chatGPT() throws IOException {
+        CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost post = new HttpPost("https://api.openai.com/v1/completions");
+        post.addHeader("Content-Type", "application/json");
+        post.addHeader("Authorization", "Bearer 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");
+
+        String paramJson = "{\"model\": \"text-davinci-003\", \"prompt\": \"使用Java实现冒泡排序\", \"temperature\": 0, \"max_tokens\": 1024}";
+        StringEntity stringEntity = new StringEntity(paramJson, ContentType.create("text/json", "UTF-8"));
+        post.setEntity(stringEntity);
+
+        CloseableHttpResponse response = httpClient.execute(post);
+        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+            String res = EntityUtils.toString(response.getEntity());
+            System.out.println(res);
+        } else {
+            System.out.println(response.getStatusLine().getStatusCode());
+        }
+    }
+
 }
