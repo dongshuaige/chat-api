@@ -54,7 +54,7 @@ public class SpringBootRunTest {
 
     @Test
     public void test_openAI() throws IOException {
-        String answer = openAI.doChatGPT("使用java实现建造模式");
+        String answer = openAI.doChatGPT("使用java实现策略模式");
         logger.info("回答结果:{}", answer);
     }
 
