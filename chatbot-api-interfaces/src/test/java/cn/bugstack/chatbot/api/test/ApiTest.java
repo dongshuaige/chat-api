@@ -12,6 +12,8 @@ import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * @description: 单元测试
@@ -20,6 +22,11 @@ import java.io.IOException;
  */
 
 public class ApiTest {
+    @Test
+    public void base64(){
+        String cronExpression = new String(Base64.getDecoder().decode("MC8zMCAqICogKiAqID8="), StandardCharsets.UTF_8);
+        System.out.println(cronExpression);
+    }
     @Test
     public void query_unanswered_questions() throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();

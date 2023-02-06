@@ -27,18 +27,15 @@ import java.util.List;
  */
 @Service
 public class OpenAI implements IOpenAI {
-    private final Logger logger = LoggerFactory.getLogger(OpenAI.class);
-    @Value("${chatbot-api.openAiKey}")
-    private String openAiKey;
 
     @Override
-    public String doChatGPT(String question) throws IOException {
+    public String doChatGPT(String openAiKey, String question) throws IOException {
         CloseableHttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost("https://api.openai.com/v1/completions");
         post.addHeader("Content-Type", "application/json");
-        post.addHeader("Authorization", "Bearer "+openAiKey);
+        post.addHeader("Authorization", "Bearer " + openAiKey);
 
-        String paramJson = "{\"model\": \"text-davinci-003\", \"prompt\": \""+question+"\", \"temperature\": 0, \"max_tokens\": 1024}";
+        String paramJson = "{\"model\": \"text-davinci-003\", \"prompt\": \"" + question + "\", \"temperature\": 0, \"max_tokens\": 1024}";
         StringEntity stringEntity = new StringEntity(paramJson, ContentType.create("text/json", "UTF-8"));
         post.setEntity(stringEntity);
 

@@ -29,10 +29,12 @@ public class SpringBootRunTest {
 
     @Resource
     private IZsxqApi zsxqApi;
-    @Value("${chatbot-api.groupId}")
+    @Value("${chatbot-api.group01.groupId}")
     private String groupId;
-    @Value("${chatbot-api.cookie}")
+    @Value("${chatbot-api.group01.cookie}")
     private String cookie;
+    @Value("${chatbot-api.group01.openAiKey}")
+    private String openAiKey;
     @Resource
     private IOpenAI openAI;
 
@@ -54,7 +56,7 @@ public class SpringBootRunTest {
 
     @Test
     public void test_openAI() throws IOException {
-        String answer = openAI.doChatGPT("使用java实现策略模式");
+        String answer = openAI.doChatGPT(openAiKey,"使用java实现策略模式");
         logger.info("回答结果:{}", answer);
     }
 
