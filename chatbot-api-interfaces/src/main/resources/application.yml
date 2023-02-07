@@ -10,3 +10,4 @@ chatbot-api:
     cookie: # 知识星球个人cookie信息
     openAiKey: # 自行申请 https://beta.openai.com/overview
     cronExpression: MC8zMCAqICogKiAqID8= # 执行的频次配置，参考：cron.qqe2.com base64加密
+    silenced: false
